@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MapperService } from 'src/shared/mapper.service';
+import { MapperService } from '../../shared/mapper.service';
 import { UserDto } from './dto/user.dto';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
@@ -33,7 +33,7 @@ export class UserService {
     return this._mapperService.map<User, UserDto>(user, new UserDto());
   }
 
-  async getAll(): Promise<UserDto> {
+  async getAll(): Promise<UserDto[]> {
     const users: User[] = await this._userRepository.find({
       where: { status: 'ACTIVE' },
     });
